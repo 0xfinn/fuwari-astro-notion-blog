@@ -63,8 +63,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Fetch Notion Content
-        run: node scripts/fetch-notion.js
-
       - name: Run Astro Build
         run: pnpm astro build

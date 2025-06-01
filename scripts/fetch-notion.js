@@ -4,7 +4,14 @@ import { fileURLToPath } from "url";
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
 import "dotenv/config";
-import { richTextToPlainText } from "../src/utils/rich-text-utils.js";
+// 删除原有的 richTextToPlainText 导入
+// import { richTextToPlainText } from "../src/utils/rich-text-utils.js";
+
+// 直接在此处定义 richTextToPlainText 方法
+function richTextToPlainText(richTextArray) {
+  if (!Array.isArray(richTextArray)) return '';
+  return richTextArray.map(rt => rt.plain_text || '').join('');
+}
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const n2m = new NotionToMarkdown({ notionClient: notion });
