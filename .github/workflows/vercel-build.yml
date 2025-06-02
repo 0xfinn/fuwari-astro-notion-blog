@@ -5,9 +5,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Trigger Vercel Deploy
         run: |
-          curl -X POST "$VERCEL_DEPLOY_HOOK" # 替换为你的 Vercel Deploy Hook URL
+          curl -X POST "$VERCEL_DEPLOY_HOOK" # 使用 env 变量
