@@ -4,18 +4,16 @@ import { fileURLToPath } from "url";
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
 import "dotenv/config";
-import fetch from "node-fetch";
-// 删除原有的 richTextToPlainText 导入
-// import { richTextToPlainText } from "../src/utils/rich-text-utils.js";
-
 // 直接在此处定义 richTextToPlainText 方法
 function richTextToPlainText(richTextArray) {
 	if (!Array.isArray(richTextArray)) return "";
 	return richTextArray.map((rt) => rt.plain_text || "").join("");
 }
 
-const databaseIds = process.env.NOTION_DATABASE_IDS.split(",").map((id) => id.trim());
-const notion = new Client({ auth: process.env.NOTION_API_KEY, fetch });
+const databaseIds = process.env.NOTION_DATABASE_IDS.split(",").map((id) =>
+	id.trim(),
+);
+const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const n2m = new NotionToMarkdown({ notionClient: notion });
 // const databaseId = process.env.NOTION_DATABASE_IDS;
 const __filename = fileURLToPath(import.meta.url);
