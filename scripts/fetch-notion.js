@@ -6,8 +6,8 @@ import { NotionToMarkdown } from "notion-to-md";
 import "dotenv/config";
 // 直接在此处定义 richTextToPlainText 方法
 function richTextToPlainText(richTextArray) {
-	if (!Array.isArray(richTextArray)) return "";
-	return richTextArray.map((rt) => rt.plain_text || "").join("");
+	if (!Array.isArray(richTextArray)) return "''";
+	return richTextArray.map((rt) => rt.plain_text || "").join("''");
 }
 
 const databaseIds = process.env.NOTION_DATABASE_IDS.split(",").map((id) =>
@@ -45,12 +45,12 @@ export async function syncNotion() {
 				page.properties.Tags?.multi_select?.map((tag) => tag.name) || []
 			).filter(Boolean);
 			const category = page.properties.Category?.select?.name || "''";
-			let cover = "";
+			let cover = "''";
 			if (page.cover) {
 				if (page.cover.type === "external") {
-					cover = page.cover.external.url || "";
+					cover = page.cover.external.url || "''";
 				} else if (page.cover.type === "file") {
-					cover = page.cover.file.url || "";
+					cover = page.cover.file.url || "''";
 				}
 			}
 			const yamlEscape = (str) =>
