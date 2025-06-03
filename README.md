@@ -45,7 +45,7 @@ pnpm install
 
 ```
 NOTION_API_KEY=your_notion_api_key
-NOTION_DATABASE_ID=your_notion_database_id
+NOTION_DATABASE_IDS=your_notion_database_id
 ```
 
 #### 启动开发服务器
